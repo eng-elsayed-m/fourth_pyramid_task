@@ -16,7 +16,8 @@ class _ScanWidgetState extends State<ScanWidget> {
       this.controller = controller;
     });
     controller.scannedDataStream.listen((scanData) {
-      if (result != null) {
+      if (scanData.code != null) {
+        result = scanData;
         context.read<QRBloc>().add(SaveResultsEvent(result!.code!));
       }
     });

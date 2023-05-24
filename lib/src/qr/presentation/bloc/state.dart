@@ -16,7 +16,8 @@ class QRLoadingState extends QRCodeState {
 }
 
 class ResultSavedState extends QRCodeState {
-  const ResultSavedState();
+  final String message;
+  const ResultSavedState(this.message);
 }
 
 class QRCodeScanFailedState extends QRCodeState {

@@ -53,7 +53,7 @@ class QRBloc extends Bloc<QRCodeEvent, QRCodeState> {
       emit(admin.fold((l) => QRCodeScanFailedState(_mapFailureToMessage(l)),
           (r) {
         if (!r) throw "Result not saved!";
-        return const ResultSavedState();
+        return const ResultSavedState("");
       }));
     } on Exception catch (e) {
       emit(QRCodeScanFailedState(e.toString()));
