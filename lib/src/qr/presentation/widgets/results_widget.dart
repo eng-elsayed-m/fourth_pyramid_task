@@ -6,24 +6,30 @@ class ResultsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-          left: Pding.paddingXXL, right: Pding.paddingXXL),
-      child: results.isEmpty
-          ? Center(
-              child: Padding(
-                padding: const EdgeInsets.all(Pding.paddingL),
-                child: Text(
-                  "No Scanning history!",
-                  style:
-                      safeGoogleFont(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
+    var size = MediaQuery.of(context).size;
+
+    return results.isEmpty
+        ? Center(
+            child: Padding(
+              padding: const EdgeInsets.all(Pding.paddingL),
+              child: Text(
+                "No Scanning history!",
+                style:
+                    safeGoogleFont(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-            )
-          : ListView(
-              shrinkWrap: true,
-              children: results.map((e) => ResultItem(result: e.data)).toList(),
             ),
-    );
+          )
+        : Padding(
+            padding: const EdgeInsets.symmetric(horizontal: Pding.paddingXXL),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxHeight: size.height * 0.45),
+              child: ListView(
+                shrinkWrap: true,
+                children: results.reversed
+                    .map((e) => ResultItem(result: e.data))
+                    .toList(),
+              ),
+            ),
+          );
   }
 }
